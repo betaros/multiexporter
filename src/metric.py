@@ -1,19 +1,13 @@
-import reverse_geocode
-
-
-def create_metric(data: dict, lat: float, lon: float):
+def create_metric(data: dict, location: str):
     """
     Creates metrics
 
     :param data:
-    :param lat:
-    :param lon:
+    :param location:
     :return:
     """
 
     values = []
-    coordinates = ((lat, lon),)
-    location = reverse_geocode.search(coordinates)[0]['city']
 
     for key, value in data.items():
         help_data = "# HELP " + key

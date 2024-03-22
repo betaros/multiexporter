@@ -3,6 +3,7 @@ from datetime import datetime
 from fastapi import FastAPI
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
+import reverse_geocode
 
 from openmeteo import collect_data
 from metric import create_metric
@@ -14,6 +15,9 @@ weather_data = ""
 lat = 53.9288531
 lon = 12.3409471
 
+coordinates = ((lat, lon),)
+location = reverse_geocode.search(coordinates)[0]['city']
+
 
 async def fetch_weather_data():
     """
@@ -21,10 +25,9 @@ async def fetch_weather_data():
     :return:
     """
     data = collect_data(lat, lon)
-    metric = create_metric(data, lat, lon)
+    metric = create_metric(data, location)
     global weather_data
     weather_data = '\n'.join(metric)
-    print(weather_data)
 
 
 @app.on_event("startup")
@@ -43,6 +46,7 @@ async def get_weather():
     Get the weather data
     :return:
     """
+    global weather_data
     return weather_data
 
 if __name__ == "__main__":

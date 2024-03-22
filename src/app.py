@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
 
-from src.openmeteo import collect_data
-from src.metric import create_metric
+from openmeteo import collect_data
+from metric import create_metric
 
 app = FastAPI()
 scheduler = AsyncIOScheduler()
@@ -23,7 +23,8 @@ async def fetch_weather_data():
     data = collect_data(lat, lon)
     metric = create_metric(data, lat, lon)
     global weather_data
-    weather_data = "\n".join(metric)
+    weather_data = '\n'.join(metric)
+    print(weather_data)
 
 
 @app.on_event("startup")
@@ -32,7 +33,7 @@ async def start_scheduler():
     Start the scheduler
     :return:
     """
-    scheduler.add_job(fetch_weather_data, "interval", minutes=1, next_run_time=datetime.now())
+    scheduler.add_job(fetch_weather_data, "interval", minutes=5, next_run_time=datetime.now())
     scheduler.start()
 
 

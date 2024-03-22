@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
 import reverse_geocode
@@ -47,7 +47,7 @@ async def get_weather():
     :return:
     """
     global weather_data
-    return weather_data
+    return Response(content=weather_data, media_type="text/plain")
 
 if __name__ == "__main__":
     uvicorn.run("app:app", host="0.0.0.0", port=9111, log_level="info")

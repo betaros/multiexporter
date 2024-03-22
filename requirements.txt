@@ -1,6 +1,6 @@
-uvicorn~=0.29.0
-fastapi~=0.110.0
-APScheduler~=3.10.4
+uvicorn
+fastapi
+APScheduler
 openmeteo_requests
 requests_cache
 retry_requests

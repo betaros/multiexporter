@@ -1,4 +1,4 @@
-def create_metric(data: dict, location: str):
+def create_metric(service: str, data: dict, location: str):
     """
     Creates metrics
 
@@ -10,9 +10,9 @@ def create_metric(data: dict, location: str):
     values = []
 
     for key, value in data.items():
-        help_data = "# HELP openmeteo_" + key + " The " + " ".join(key.split('_'))
-        type_data = "# TYPE openmeteo_" + key + " gauge"
-        message_data = 'openmeteo_' + key + '{location=\"' + location + '\"} ' + str(value)
+        help_data = "# HELP " + service + "_" + key + " The " + " ".join(key.split('_'))
+        type_data = "# TYPE " + service + "_" + key + " gauge"
+        message_data = service + "_" + key + '{location=\"' + location + '\"} ' + str(value)
 
         values.append(help_data)
         values.append(type_data)

@@ -5,7 +5,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
 import reverse_geocode
 
-from openmeteo import collect_data
+from service.openmeteo import collect_data
 from metric import create_metric
 
 app = FastAPI()
@@ -25,7 +25,7 @@ async def fetch_weather_data():
     :return:
     """
     data = collect_data(lat, lon)
-    metric = create_metric(data, location)
+    metric = create_metric("openmeteo", data, location)
     global weather_data
     weather_data = '\n'.join(metric)
 

@@ -50,4 +50,4 @@ async def get_weather():
     return weather_data
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", port=9111, log_level="info")
+    uvicorn.run("app:app", host="0.0.0.0", port=9111, log_level="info")

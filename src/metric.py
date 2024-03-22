@@ -10,8 +10,8 @@ def create_metric(data: dict, location: str):
     values = []
 
     for key, value in data.items():
-        help_data = "# HELP " + key
-        type_data = "# TYPE " + key
+        help_data = "# HELP openmeteo_" + key + " The " + " ".join(key.split('_'))
+        type_data = "# TYPE openmeteo_" + key + " gauge"
         message_data = 'openmeteo_' + key + '{location=\"' + location + '\"} ' + str(value)
 
         values.append(help_data)

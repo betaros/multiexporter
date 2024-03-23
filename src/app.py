@@ -1,14 +1,20 @@
 from datetime import datetime
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Request
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
 import reverse_geocode
+from starlette.staticfiles import StaticFiles
+from starlette.templating import Jinja2Templates
 
 from service.openmeteo import collect_data
 from metric import create_metric
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
 scheduler = AsyncIOScheduler()
 weather_data = ""
 
@@ -49,5 +55,16 @@ async def get_weather():
     global weather_data
     return Response(content=weather_data, media_type="text/plain")
 
+
+@app.get("/")
+async def root(request: Request):
+    context = {
+        "request": request,
+        "message": "Hello, World!",
+        "lat": lat,
+        "lon": lon
+    }
+    return templates.TemplateResponse("index.html", context)
+
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=9111, log_level="info")
+    uvicorn.run("app:app", host="127.0.0.1", port=9111, log_level="info")

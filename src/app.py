@@ -1,16 +1,17 @@
 from datetime import datetime
-
 from fastapi import FastAPI, Response, Request
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import uvicorn
 import reverse_geocode
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+from service.OpenMeteoService import collect_data
 
-from service.openmeteo import collect_data
-from metric import create_metric
+from src.utils.metric import create_metric
+from src.controller.OpenMeteoController import open_meteo_router
 
 app = FastAPI()
+app.include_router(open_meteo_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")

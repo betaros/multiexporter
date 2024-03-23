@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">OpenMeteo</h1>
+</div>
+
+<input type="hidden" id="latitude" value="{{ lat }}">
+<input type="hidden" id="longitude" value="{{ lon }}">
+<div id="map" style="width: 600px; height: 400px;"></div>
+<script>
+    const lat = document.querySelector('#latitude').value;
+    const lon = document.querySelector('#longitude').value;
+    const map = L.map('map').setView([lat, lon], 13);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+</script>

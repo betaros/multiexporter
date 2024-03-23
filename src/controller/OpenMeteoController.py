@@ -13,7 +13,7 @@ async def get_config():
     return {"lat": "12", "lon": "10"}
 
 
-@open_meteo_router.post("/config", description="Set configuration")
+@open_meteo_router.put("/config", description="Set configuration")
 async def set_config(lat: float, lon: float):
     return {"lat": lat, "lon": lon}
 

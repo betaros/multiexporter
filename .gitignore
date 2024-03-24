@@ -240,3 +240,4 @@ cython_debug/
 #.idea/
 
 /src/.cache.sqlite
+*DS_Store

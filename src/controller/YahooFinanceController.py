@@ -4,7 +4,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from src.service.YahooFinanceService import YahooFinanceService
 
-yahoo_finance_router = APIRouter(prefix="/open-meteo", tags=["weather"])
+yahoo_finance_router = APIRouter(prefix="/yahoo-finance", tags=["finance"])
 yahoo_finance_service = YahooFinanceService()
 scheduler = AsyncIOScheduler()
 
@@ -19,10 +19,10 @@ async def start_scheduler():
     scheduler.start()
 
 
-@yahoo_finance_router.get("/metrics", description="Return metrics for given lat and lon")
-async def get_weather():
+@yahoo_finance_router.get("/metrics", description="Return metrics for given stocks")
+async def get_financial_metrics():
     """
-    Get the weather data
+    Get the stock data
     :return:
     """
     return Response(content=yahoo_finance_service.financial_data, media_type="text/plain")

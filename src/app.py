@@ -6,11 +6,13 @@ from starlette.templating import Jinja2Templates
 
 from controller.OpenMeteoController import open_meteo_router
 from controller.UtilsController import utils_router
+from controller.YahooFinanceController import yahoo_finance_router
 from utils.location import Location
 
 app = FastAPI()
 app.include_router(utils_router)
 app.include_router(open_meteo_router)
+app.include_router(yahoo_finance_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")

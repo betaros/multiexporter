@@ -63,5 +63,5 @@ class OpenMeteoService:
         :return:
         """
         data = self.collect_data()
-        metric = create_metric("openmeteo", data, self.city)
+        metric = create_metric("openmeteo", data, "location", self.city)
         self.weather_data = '\n'.join(metric)

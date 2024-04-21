@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "multiexporter"
+version = "0.1.0"
+description = ""
+authors = ["betaros <betaros@gmx.de>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+yfinance = "^0.2.38"
+uvicorn = "^0.29.0"
+fastapi = "^0.110.2"
+apscheduler = "^3.10.4"
+openmeteo-requests = "^1.2.0"
+requests-cache = "^1.2.0"
+retry-requests = "^2.0.0"
+reverse-geocode = "^1.6"
+jinja2 = "^3.1.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

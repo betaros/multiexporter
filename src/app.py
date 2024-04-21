@@ -9,8 +9,8 @@ from controller.UtilsController import utils_router
 from utils.location import Location
 
 app = FastAPI()
-app.include_router(open_meteo_router)
 app.include_router(utils_router)
+app.include_router(open_meteo_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")

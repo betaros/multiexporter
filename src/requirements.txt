@@ -1,8 +1,0 @@
-uvicorn
-fastapi
-APScheduler
-openmeteo_requests
-requests_cache
-retry_requests
-reverse_geocode
-jinja2
